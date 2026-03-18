@@ -1,0 +1,53 @@
+#include <iostream>
+#include <chrono>
+#include <algorithm>
+
+void solve(){
+
+    int count = 0;
+    const int c = 5;
+    const int r;
+
+    std::string s = "1010010101010100111001010111010001010100101011111010100101111";
+    int sizeS = sizeof(s)/sizeof(s[0]);
+    int rRemainder = r % c;
+    r = (sizeS - rRemainder + c) / c;
+
+    bool sPrime[c][r];
+    
+    for(int i = 0; i<=c-1; i++){
+	for(int j = 0; j<=r-1; j++){
+            if ((i+1)*(j+1)>=sizeS)) &sPrime[i][j] = nullPtr; 
+	    else if(s[i]=='1') sPrime[i][j] = true;
+            else sPrime[i][j] = false;
+	}
+    }
+
+    for(int i = 0; i<=c-1; i++){
+        for(int j = 0; j<=r-1; j++){
+            if(sPrime[i][j] && !sPrime[i+1][j] && !sPrime[i+2][j] && !sPrime[i+3][j] &&
+            !sPrime[i][j+1] && !sPrime[i+1][j+1] && sPrime[i+2][j+1] && sPrime[i+3][j+1] &&
+            !sPrime[i][j+2] && !sPrime[i+1][j+2] && !sPrime[i+2][j+2] && !sPrime[i+3][j+2] &&
+            sPrime[i][j+3] && !sPrime[i+1][j+3] && sPrime[i+2][j+3] && !sPrime[i+3][j+3]) count+=1;
+        }
+    }
+
+    std::cout<<'\n'<<"number of amogus: "<<count;
+
+}
+
+int main() {
+    std::ios_base::sync_with_stdio(false);
+    std::cin.tie(NULL);
+    auto start = std::chrono::high_resolution_clock::now();
+
+    solve();
+
+    auto stop = std::chrono::high_resolution_clock::now();
+    auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(stop - start);
+    std::cout<<'\n';
+    std::cerr << "Time taken: " << duration.count() << " ms" << std::endl;
+
+    return 0;
+}
+
